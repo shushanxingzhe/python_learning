@@ -18,7 +18,7 @@ test = np.reshape([5,10,15,18,100],[-1, 1])
 print(test)
 
 quadratic_featurizer = PolynomialFeatures(degree=2)
-features = quadratic_featurizer.fit_transform(features)
+features = quadratic_featurizer.fit_transform(features,labels)
 test = quadratic_featurizer.transform(test)
 
 
