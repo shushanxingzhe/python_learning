@@ -19,7 +19,7 @@ model = tf.keras.models.Sequential([
 # Take a look at the model summary
 # tf.keras.utils.plot_model(model)
 model.summary()
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=tf.keras.optimizers.Adam, loss=tf.keras.losses.sparse_categorical_crossentropy, metrics=['accuracy'])
 
 
 def decay(epoch):

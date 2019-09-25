@@ -64,3 +64,6 @@ right = pd.DataFrame(
      'subject_id': ['sub2', 'sub4', 'sub3', 'sub6', 'sub5']})
 rs = pd.merge(left, right, on='subject_id', how='inner')
 print(rs)
+
+# change data in dataframe
+# df.loc[df['query'] == query, 'label'] = label
