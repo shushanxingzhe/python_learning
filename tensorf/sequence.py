@@ -19,7 +19,7 @@ model = tf.keras.models.Sequential([
 # Take a look at the model summary
 # tf.keras.utils.plot_model(model)
 model.summary()
-model.compile(optimizer=tf.keras.optimizers.Adam, loss=tf.keras.losses.sparse_categorical_crossentropy, metrics=['accuracy'])
+model.compile(optimizer='adam', loss=tf.keras.losses.sparse_categorical_crossentropy, metrics=['accuracy'])
 
 
 def decay(epoch):
@@ -32,7 +32,7 @@ def decay(epoch):
 
 
 callbacks = [
-    tf.keras.callbacks.TensorBoard(log_dir="./logs"),
+    tf.keras.callbacks.TensorBoard(log_dir="logs"),
     tf.keras.callbacks.LearningRateScheduler(decay),
     tf.keras.callbacks.EarlyStopping(patience=2, monitor='val_loss'),
 ]
