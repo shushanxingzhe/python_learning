@@ -12,7 +12,7 @@ Viterbi算法就是求解HMM上的最短路径（-log(prob)，也即是最大概
 # HMM描述 lambda = (states, observations, start_probability, transition_probability, emission_probability)
 states = ('Rainy', 'Sunny', 'Cloudy')
 
-observations = ('walk', 'shop', 'clean', 'clean')
+observations = ('Walk', 'Shop', 'Clean', 'Clean', 'Shop', 'Shop', 'Walk')
 
 start_probability = {'Rainy': 0.5, 'Sunny': 0.3, 'Cloudy': 0.2}
 
@@ -23,9 +23,9 @@ transition_probability = {
 }
 
 emission_probability = {
-    'Rainy': {'walk': 0.1, 'shop': 0.4, 'clean': 0.5},
-    'Sunny': {'walk': 0.6, 'shop': 0.3, 'clean': 0.1},
-    'Cloudy': {'walk': 0.3, 'shop': 0.4, 'clean': 0.3},
+    'Rainy': {'Walk': 0.1, 'Shop': 0.4, 'Clean': 0.5},
+    'Sunny': {'Walk': 0.6, 'Shop': 0.3, 'Clean': 0.1},
+    'Cloudy': {'Walk': 0.3, 'Shop': 0.4, 'Clean': 0.3},
 }
 
 
@@ -99,4 +99,5 @@ def example():
                    emission_probability)
 
 
+print('observations:    ',observations)
 print(example())

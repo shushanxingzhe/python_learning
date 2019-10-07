@@ -35,6 +35,7 @@ callbacks = [
     tf.keras.callbacks.TensorBoard(log_dir="logs"),
     tf.keras.callbacks.LearningRateScheduler(decay),
     tf.keras.callbacks.EarlyStopping(patience=2, monitor='val_loss'),
+    tf.keras.callbacks.ModelCheckpoint('./weights/checkpoint.h5', load_weights_on_restart=True, mode='auto', save_freq=2000),
 ]
 history = model.fit(x_train, y_train, epochs=5, callbacks=callbacks)
 model.summary()
