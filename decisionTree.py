@@ -1,5 +1,3 @@
-#
-#
 # X = [
 #     ['Young', 'No Work', 'No House', 'Credit'],
 #     ['Young', 'No Work', 'No House', 'Good Credit'],
@@ -40,30 +38,28 @@ X = [
     [3, 0, 0, 1],
      ]
 Y = [0, 0,1,1,0,0,0,1,1,1,1,1,1,1,0]
-
-from sklearn import tree
-import matplotlib.pyplot as plt
-clf = tree.DecisionTreeClassifier()
-clf.fit(X,Y)
-
-tree.plot_tree(clf)
-plt.show()
-
-# import xgboost as xgb
-# import numpy as np
-# import pandas as pd
+#
+# from sklearn import tree
 # import matplotlib.pyplot as plt
-# from sklearn import preprocessing
+# clf = tree.DecisionTreeClassifier()
+# clf.fit(X,Y)
 #
-# # specify parameters via map
-# param = {'max_depth': 2, 'eta': 1, 'objective': 'binary:logistic'}
-# num_round = 5
-#
-# dtrain = xgb.DMatrix(np.array(X), label=Y)
-#
-# bst = xgb.train(param, dtrain, num_round)
-# # make prediction
-# preds = bst.predict(xgb.DMatrix(np.array([[1, 0, 1, 1]])))
-# print(preds)
-# xgb.plot_tree(bst)
-# plt.show()K
+# tree.plot_tree(clf)
+# plt.show()
+
+import xgboost as xgb
+import numpy as np
+import matplotlib.pyplot as plt
+
+# specify parameters via map
+param = {'max_depth': 2, 'eta': 1, 'objective': 'binary:logistic'}
+num_round = 5
+
+dtrain = xgb.DMatrix(np.array(X), label=Y)
+
+bst = xgb.train(param, dtrain, num_round)
+# make prediction
+preds = bst.predict(xgb.DMatrix(np.array([[1, 0, 1, 1]])))
+print(preds)
+xgb.plot_tree(bst)
+plt.show()
