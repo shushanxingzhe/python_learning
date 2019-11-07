@@ -55,11 +55,10 @@ import matplotlib.pyplot as plt
 param = {'max_depth': 2, 'eta': 1, 'objective': 'binary:logistic'}
 num_round = 5
 
-dtrain = xgb.DMatrix(np.array(X), label=Y)
+model = xgb.XGBClassifier()
+model.fit(np.array(X),Y)
+preds = model.predict(np.array([[1, 0, 1, 1]]))
 
-bst = xgb.train(param, dtrain, num_round)
-# make prediction
-preds = bst.predict(xgb.DMatrix(np.array([[1, 0, 1, 1]])))
 print(preds)
-xgb.plot_tree(bst)
+xgb.plot_tree(model)
 plt.show()
