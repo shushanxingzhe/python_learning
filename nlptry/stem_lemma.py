@@ -5,7 +5,7 @@ wl = WL()
 porter = PorterStemmer()
 
 input = 'I want to check my order 19080600979414538195'
-input = 'It originated from the idea that there are readers who prefer learning new skills from the comforts of their drawing rooms'
+input = 'It originated from the idea that there are readers who prefer learning new skills from the comforts of their drawing rooms,swimmings'
 
 nltk_tokens = nltk.word_tokenize(input)
 tokens = []

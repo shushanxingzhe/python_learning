@@ -67,3 +67,18 @@ print(rs)
 
 # change data in dataframe
 # df.loc[df['query'] == query, 'label'] = label
+
+# import pandas as pd
+#
+# labeled_df = pd.read_excel('result1.xlsx')
+# result_df = pd.read_csv('result1.csv')
+#
+# for _,row in result_df.iterrows():
+#     labeled_row = labeled_df[(labeled_df['query'] == row['query'])].iloc[-1]
+#     result_df.loc[result_df['query'] == row['query'], '统计命中'] = str(labeled_row['统计命中'])
+#     if row['pred_catId'] == labeled_row['模型分类ID']:
+#         result_df.loc[result_df['query'] == row['query'], '模型命中'] = str(labeled_row['模型命中'])
+#     elif row['pred_catId'] == labeled_row['统计分类ID']:
+#         result_df.loc[result_df['query'] == row['query'], '模型命中'] = str(labeled_row['统计命中'])
+#
+# result_df.to_csv('new_result1.csv',index=False)
