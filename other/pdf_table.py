@@ -63,11 +63,12 @@ paypal_id = re.compile(r'PayPal( ID|用户名)\: (.*)')
 date = re.compile(r'(\d+)/(\d+)/(\d+) \- \d+/\d+/\d+')
 
 for f in directories:
+    print(f)
     fpath = 'data/' + f
     # with open(fpath, mode='rb') as file:
     #     info = getPdfInfo(file)
     try:
-        tables = camelot.read_pdf(fpath, pages='3,4', flavor='stream')
+        tables = camelot.read_pdf(fpath, pages='3-end', flavor='stream')
     except Exception as e:
         print('no page:', fpath)
         continue
@@ -75,14 +76,12 @@ for f in directories:
     item = {'date': '', 'user': '', 'Currency': '', 'Chargeback Activity': 0,
             'Chargeback Adjustments': 0, 'Chargeback Hold': 0, 'Chargeback Releases': 0, 'Chargeback Reversals': 0,
             'Total': 0}
-
+    yes = False
+    data = {}
+    is_all = False
     for table in tables:
-        yes = False
-        data = {}
         col_map = {}
 
-        if fpath in ['data/moremoremoneycomehere@gmail.com-201911.PDF', 'data/paymentsfromkingdomofbeer@gmail.com-201911.PDF', 'data/Wearewaitingforyoubaby@gmail.com-201911.PDF']:
-            fpath
         line = ''.join(table.data[0])
         head = table.data[0]
         if line == 'PayPal ID:' or line == 'PayPal用户名:':
@@ -100,35 +99,47 @@ for f in directories:
                     break
 
         for row in table.data:
-            if row[0] == 'C\nhargeback' or row[0] == '退\n单':
+            if ''.join(row) == row[0] and ''.join(row) in ['C\nhargeback', '退\n单', 'Chargeback', '退单']:
                 yes = True
                 continue
+            # new head
+            if len(row[0]) > 0 and len(''.join(row[1:])) == 0:
+                if yes:
+                    is_all = True
+                    break
+                yes = False
+                continue
             if yes:
+                row = '\n'.join(row).split('\n')
                 if row[0] == 'Description' or row[0] == '说明':
                     col_map = {}
                     for idx, col in enumerate(row[1:]):
                         col_map[idx] = col
                 else:
                     for idx, col in enumerate(row[1:]):
+                        if idx not in col_map:
+                            continue
                         if col_map[idx] not in data:
                             data[col_map[idx]] = {}
 
                         if row[0] in translate_map:
                             row[0] = translate_map[row[0]]
                         data[col_map[idx]][row[0]] = col.strip().replace(',', '')
+        if is_all:
+            break
 
-        for cur in data:
-            row = item.copy()
-            if len(row['user']) == 0 or len(row['date']) == 0:
-                print('user date:', fpath)
-            row['Currency'] = cur
-            keep = False
-            for k in data[cur]:
-                row[k] = data[cur][k]
-                if len(data[cur][k]) and float(data[cur][k]) > 0.0:
-                    keep = True
-            if keep:
-                result.append(row)
+    for cur in data:
+        row = item.copy()
+        if len(row['user']) == 0 or len(row['date']) == 0:
+            print('user date:', fpath)
+        row['Currency'] = cur
+        keep = False
+        for k in data[cur]:
+            if len(data[cur][k]) and (k in row) and float(data[cur][k]) != 0.0:
+                row[k] = float(data[cur][k])
+                keep = True
+        if keep:
+            result.append(row)
 
 df = pd.DataFrame(result)
 df.index += 1

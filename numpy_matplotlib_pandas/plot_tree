@@ -1,0 +1,29 @@
+from anytree import Node, RenderTree
+import pandas as pd
+
+
+df = pd.read_csv('category_with_layers.csv')
+# df = df[((df['cat_level'] == 1) | (df['cat_level'] == 2))]
+df = df.sort_values(by='parent_id',ascending=True)
+cat_map = {}
+# catid	catname	parent_id
+root = Node("Root")
+cat_map[0] = root
+for index, row in df.iterrows():
+    cur = Node(row['catname'] + "-"+str(row['catid']))
+    cat_map[row['catid']] = cur
+
+for index, row in df.iterrows():
+    cur = cat_map[row['catid']]
+    cur.parent = cat_map[row['parent_id']]
+
+
+for pre, fill, node in RenderTree(root):
+    print("%s%s" % (pre, node.name))
+from anytree.exporter import DotExporter
+
+DotExporter(root).to_picture("category.png")
+
+
+
+
