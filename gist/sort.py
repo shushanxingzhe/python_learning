@@ -2,8 +2,8 @@ def bubbleSort(arr):
     length = len(arr)
     for i in range(length):
         for j in range(1, length - i):
-            if arr[j-1] > arr[j]:
-                arr[j-1], arr[j] = arr[j], arr[j-1]
+            if arr[j - 1] > arr[j]:
+                arr[j - 1], arr[j] = arr[j], arr[j - 1]
     return arr
 
 
@@ -11,7 +11,7 @@ def selectSort(arr):
     length = len(arr)
     for i in range(length):
         minindex = i
-        for j in range(i+1, length):
+        for j in range(i + 1, length):
             if arr[j] < arr[minindex]:
                 minindex = j
         if minindex != i:
@@ -22,7 +22,7 @@ def selectSort(arr):
 def insertSort(arr):
     length = len(arr)
     for i in range(length):
-        cur,preindex = arr[i],i
+        cur, preindex = arr[i], i
         while preindex > 0 and cur > arr[preindex]:
             preindex -= 1
         arr[i], arr[preindex] = arr[preindex], arr[i]
@@ -30,8 +30,7 @@ def insertSort(arr):
 
 
 def quickSort(arr):
-
-    def partition(arr,left,right):
+    def partition(arr, left, right):
         base = left
         while left < right:
             while left < right and arr[right] >= arr[base]:
@@ -42,18 +41,19 @@ def quickSort(arr):
         arr[left], arr[base] = arr[base], arr[left]
         return left
 
-    def sort(arr,left,right):
+    def sort(arr, left, right):
         if left >= right:
             return
-        base = partition(arr,left,right)
-        sort(arr,left,base-1)
-        sort(arr,base+1,right)
-    sort(arr,0,len(arr)-1)
+        base = partition(arr, left, right)
+        sort(arr, left, base - 1)
+        sort(arr, base + 1, right)
+
+    sort(arr, 0, len(arr) - 1)
     return arr
 
 
 def mergeSort(arr):
-    def merge(left,right):
+    def merge(left, right):
         result = []
         i = j = 0
         left_len = len(left)
@@ -66,14 +66,16 @@ def mergeSort(arr):
                 result.append(right[j])
                 j += 1
         return result + left[i:] + right[j:]
+
     if len(arr) < 2:
         return arr
     mid = len(arr) // 2
     left = arr[:mid]
     right = arr[mid:]
-    return merge(left,right)
+    return merge(left, right)
 
-data = [9, 8, 2, 4, 3, 3, 6, 5 ,1]
+
+data = [9, 8, 2, 4, 3, 3, 6, 5, 1]
 print(bubbleSort(data))
 print(selectSort(data))
 print(insertSort(data))
