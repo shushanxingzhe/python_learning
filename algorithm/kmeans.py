@@ -16,8 +16,7 @@ class KMeans(object):
         distance = np.zeros((len(train), self.cluster))
         while step < self.max_epoch or move > self.min_move:
             for i in range(self.cluster):
-                np.linalg.norm
-                distance[:, i] = np.sqrt(np.square(train[:, 0] - center[i][0]) + np.square(train[:, 1] - center[i][1]))
+                distance[:, i] = np.sqrt(np.sum(np.square(center[i] - train), axis=-1))
             lables = np.argmin(distance, axis=1)
             pre_center = center
             for i in range(self.cluster):

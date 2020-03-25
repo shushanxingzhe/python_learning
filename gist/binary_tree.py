@@ -106,6 +106,26 @@ class TreeNode(object):
                 queue.append(cur.right)
         return res
 
+    def double_link(self):
+        stack = []
+        cur = self
+        queue = []
+        while stack or cur:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                queue.append(cur)
+                cur = cur.right
+        queue_len = len(queue)
+        for i in range(queue_len):
+            if i+1 < queue_len:
+                queue[i].right = queue[i+1]
+            if i-1 >= 0:
+                queue[i].left = queue[i-1]
+        return queue[0]
+
 
 tree = TreeNode(5)
 tree.insert(9)
@@ -124,6 +144,13 @@ print('mid_traversal:', tree.mid_traversal())  # 1 2 3 4 5 6 7 9 10
 print('post_traversal_recursive:', tree.post_traversal_recursive())  # 1 2 4 3 6 7 10 9 5
 print('post_traversal:', tree.post_traversal())  # 1 2 4 3 6 7 10 9 5
 print('level_traversal:', tree.level_traversal())  # 5 3 9 2 4 7 10 1 6
+
+doubleLink = tree.double_link()
+items = []
+while doubleLink:
+    items.append(doubleLink.value)
+    doubleLink = doubleLink.right
+print(items)
 
 
 def rebuild_tree(list1, list2):
