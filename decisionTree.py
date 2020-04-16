@@ -51,14 +51,23 @@ import xgboost as xgb
 import numpy as np
 import matplotlib.pyplot as plt
 
-# specify parameters via map
-param = {'max_depth': 2, 'eta': 1, 'objective': 'binary:logistic'}
-num_round = 5
+dtest = np.array([[1, 0, 1, 1], [2, 0, 1, 3]])
 
 model = xgb.XGBClassifier()
-model.fit(np.array(X),Y)
-preds = model.predict(np.array([[1, 0, 1, 1]]))
+model.fit(np.array(X), Y)
+preds = model.predict(dtest)
 
 print(preds)
+
+dtrain = xgb.DMatrix(np.array(X), label=np.array(Y))
+dtest = xgb.DMatrix(dtest)
+
+params = {'max_depth': 2, 'eta': 1, 'objective': 'binary:logistic'}
+
+bst = xgb.train(params, dtrain, 2)
+result = bst.predict(dtest)
+print(result)
+
 xgb.plot_tree(model)
+xgb.plot_tree(bst)
 plt.show()

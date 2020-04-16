@@ -19,6 +19,10 @@ class TreeNode(object):
         else:
             self.value = val
 
+    def insert_list(self, arr):
+        for v in arr:
+            self.insert(v)
+
     def pre_traversal_recursive(self):
         res = []
         if self.value:
@@ -128,14 +132,7 @@ class TreeNode(object):
 
 
 tree = TreeNode(5)
-tree.insert(9)
-tree.insert(3)
-tree.insert(7)
-tree.insert(2)
-tree.insert(1)
-tree.insert(6)
-tree.insert(4)
-tree.insert(10)
+tree.insert_list([9, 3, 7, 2, 1, 6, 4, 10])
 
 print('pre_traversal_recursive:', tree.pre_traversal_recursive())  # 5 3 2 1 4 9 7 6 10
 print('pre_traversal:', tree.pre_traversal())  # 5 3 2 1 4 9 7 6 10

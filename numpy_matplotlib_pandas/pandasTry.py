@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 data = [
     {'query': 'xiaomi', 'exposecount': 10, 'clickcount': 9, 'catId': 'C9'},
@@ -82,3 +83,16 @@ print(rs)
 #         result_df.loc[result_df['query'] == row['query'], '模型命中'] = str(labeled_row['统计命中'])
 #
 # result_df.to_csv('new_result1.csv',index=False)
+
+
+data = {
+    'itemid': np.linspace(1, 300, 300, dtype=int),
+    'category': np.random.randint(1, 31, 300),
+    'ctr': np.random.random(300)
+}
+
+df = pd.DataFrame(data)
+df = df.sort_values(['category', 'ctr'], ascending=False).groupby(['category'], as_index=False).head(5).reset_index(
+    drop=True)
+pd.set_option('display.max_rows', None)
+print(df)

@@ -21,24 +21,25 @@ def selectSort(arr):
 
 def insertSort(arr):
     length = len(arr)
-    for i in range(length):
-        cur, preindex = arr[i], i
-        while preindex > 0 and cur > arr[preindex]:
-            preindex -= 1
-        arr[i], arr[preindex] = arr[preindex], arr[i]
+    for i in range(1,length):
+        val, cur = arr[i], i-1
+        while cur >= 0 and val < arr[cur]:
+            arr[cur+1] = arr[cur]
+            cur -= 1
+        arr[cur+1] = val
     return arr
 
 
 def quickSort(arr):
-    def partition(arr, left, right):
+    def partition(arr1, left, right):
         base = left
         while left < right:
-            while left < right and arr[right] >= arr[base]:
+            while left < right and arr1[right] > arr1[base]:
                 right -= 1
-            while left < right and arr[left] < arr[base]:
+            while left < right and arr1[left] < arr1[base]:
                 left += 1
-            arr[left], arr[right] = arr[right], arr[left]
-        arr[left], arr[base] = arr[base], arr[left]
+            arr1[left], arr1[right] = arr1[right], arr1[left]
+        arr1[left], arr1[base] = arr1[base], arr1[left]
         return left
 
     def sort(arr, left, right):
@@ -70,14 +71,13 @@ def mergeSort(arr):
     if len(arr) < 2:
         return arr
     mid = len(arr) // 2
-    left = arr[:mid]
-    right = arr[mid:]
+    left = mergeSort(arr[:mid])
+    right = mergeSort(arr[mid:])
     return merge(left, right)
 
 
-data = [9, 8, 2, 4, 3, 3, 6, 5, 1]
-print(bubbleSort(data))
-print(selectSort(data))
-print(insertSort(data))
-print(quickSort(data))
-print(mergeSort(data))
+print(bubbleSort([9, 8, 2, 4, 3, 3, 6, 5, 1]))
+print(selectSort([9, 8, 2, 4, 3, 3, 6, 5, 1]))
+print(insertSort([9, 8, 2, 4, 3, 3, 6, 5, 1]))
+print(quickSort([9, 8, 2, 4, 3, 3, 6, 5, 1]))
+print(mergeSort([9, 8, 2, 4, 3, 3, 6, 5, 1]))
