@@ -113,7 +113,7 @@ def similar_words(word):
     return option_result
 
 
-print(similar_words('大审'))
-print(similar_words('妹纸'))
-print(similar_words('肚几'))
-print(similar_words('福利精'))
+print('大审: ', similar_words('大审'))
+print('妹纸: ', similar_words('妹纸'))
+print('肚几: ', similar_words('肚几'))
+print('福利精: ', similar_words('福利精'))

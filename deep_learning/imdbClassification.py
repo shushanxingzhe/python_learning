@@ -63,9 +63,9 @@ results = model.evaluate(test_data, test_labels)
 print(results)
 
 history_dict = history.history
-history_dict.keys()
-acc = history.history['acc']
-val_acc = history.history['val_acc']
+print(history_dict.keys())
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
 loss = history.history['loss']
 val_loss = history.history['val_loss']
 
@@ -83,8 +83,8 @@ plt.legend()
 plt.show()
 
 plt.clf()   # clear figure
-acc_values = history_dict['acc']
-val_acc_values = history_dict['val_acc']
+acc_values = history_dict['accuracy']
+val_acc_values = history_dict['val_accuracy']
 
 plt.plot(epochs, acc, 'bo', label='Training acc')
 plt.plot(epochs, val_acc, 'b', label='Validation acc')

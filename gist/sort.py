@@ -34,7 +34,7 @@ def quickSort(arr):
     def partition(arr1, left, right):
         base = left
         while left < right:
-            while left < right and arr1[right] > arr1[base]:
+            while left < right and arr1[right] >= arr1[base]:
                 right -= 1
             while left < right and arr1[left] < arr1[base]:
                 left += 1
