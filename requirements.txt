@@ -1,0 +1,11 @@
+bert-serving-client
+bert-serving-server
+bert-tensorflow
+boto3
+flair
+tensor2tensor
+tensorboard
+tensorflow
+torch
+torchvision
+Keras
