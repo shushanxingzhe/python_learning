@@ -1,0 +1,6 @@
+{
+  "learning_rate": {"_type":"uniform","_value":[0, 0.5]},
+  "max_depth":{"_type":"choice","_value":[4, 5, 6]},
+  "reg_alpha":{"_type":"choice","_value":[0.2, 0.4, 0.6, 0.8, 1]},
+  "reg_lambda":{"_type":"choice","_value":[0.2, 0.4, 0.6, 0.8, 1]}
+}

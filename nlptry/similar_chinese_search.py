@@ -75,3 +75,35 @@ for i in I[0]:
 # 浏阳
 # 沈阳
 # 岳阳
+
+# from annoy import AnnoyIndex
+#
+#
+# index = AnnoyIndex(letter_bigram_map_len, 'angular')  # Length of item vector that will be indexed
+#
+# for i in range(len(vectors)):
+#     index.add_item(i, vectors[i])
+#
+# index.build(10)
+#
+#
+# print('query:', '南冒')
+# D = index.get_nns_by_vector(query, 3)
+# for i in D:
+#     print(districts[i])
+#
+# # query: 南冒
+# # 南昌
+# # 南宁
+# # 南京
+#
+#
+# print('query:', '刘阳')
+# query = encode_letter_bigram('刘阳')
+# D = index.get_nns_by_vector(query, 3)
+# for i in D:
+#     print(districts[i])
+# # query: 刘阳
+# # 浏阳
+# # 沈阳
+# # 岳阳
