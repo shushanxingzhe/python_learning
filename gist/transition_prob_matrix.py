@@ -1,5 +1,5 @@
 # -!- coding: utf-8 -!-
-
+import numpy as np
 
 def transition_matrix(transitions):
     words = set(list(transitions))
@@ -47,6 +47,8 @@ text = '''第一百回　径回东土　五圣成真
 南无海德光明佛。南无大慈光佛。南无慈力王佛。南无贤善首佛。南无广主严佛。南无金华光佛。南无才光明佛。南无智慧胜佛。南无世静光佛。南无日月光佛。南无日月珠光佛。
 南无慧幢胜王佛。南无妙音声佛。南无常光幢佛。南无观世灯佛。南无法胜王佛。南无须弥光佛。南无大慧力王佛。南无金海光佛。南无大通光佛。南无才光佛。南无旃檀功德佛。
 南无斗战胜佛。南无观世音菩萨。南无大势至菩萨。南无文殊菩萨。南无普贤菩萨。南无清净大海众菩萨。南无莲池海会佛菩萨。南无西天极乐诸菩萨。南无三千揭谛大菩萨。南无五百阿罗大菩萨。南无比丘夷塞尼菩萨。南无无边无量法菩萨。南无金刚大士圣菩萨。南无净坛使者菩萨。南无八宝金身罗汉菩萨。南无八部天龙广力菩萨。如是等一切世界诸佛，愿以此功德，庄严佛净土。上报四重恩，下济三途苦。若有见闻者，悉发菩提心。同生极乐国，尽报此一身。十方三世一切佛，诸尊菩萨摩诃萨，摩诃般若波罗密。”《西游记》至此终。'''
+with open('../data/west_journey.txt', 'r', encoding='utf-8') as file:
+    text = file.read()
 
 matrix, wordmap = transition_matrix(text)
 
@@ -55,13 +57,16 @@ id2word = dict(zip(wordmap.values(), wordmap.keys()))
 
 def most_prob_follow(char, transit, char2id, id2char):
     id = char2id[char]
-    topn = sorted(range(len(matrix[id])), key=lambda i: matrix[id][i], reverse=True)[:3]
-    result = [(id2char[i], transit[id][i]) for i in topn]
-    return result
+    topn = np.argpartition(transit[id], -10)[-10:]
+    prob = [transit[id][i] for i in topn]
+    prob = np.array(prob) / sum(prob)
+    next_word = id2char[np.random.choice(topn, p=prob)]
+    return next_word
 
 
-print(most_prob_follow('大', matrix, wordmap, id2word))
-print(most_prob_follow('八', matrix, wordmap, id2word))
-print(most_prob_follow('东', matrix, wordmap, id2word))
-print(most_prob_follow('南', matrix, wordmap, id2word))
-print(most_prob_follow('御', matrix, wordmap, id2word))
+word = '大'
+result = [word]
+for i in range(20):
+    word = most_prob_follow(word, matrix, wordmap, id2word)
+    result.append(word)
+print(result)
