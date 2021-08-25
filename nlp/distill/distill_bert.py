@@ -7,13 +7,15 @@ from transformers import get_linear_schedule_with_warmup
 import torch
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
+import os
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 # device
 device = torch.device('cuda' if torch.cuda.is_available()  else 'cpu')
 
 # Define models
-teacher_model = BertForSequenceClassification.from_pretrained('bert-base-uncased')
+teacher_model = BertForSequenceClassification.from_pretrained('bert-base-uncased', output_hidden_states=True)
 teacher_model.output_hidden_states = True
 # Teacher should be initialized with pre-trained weights and fine-tuned on the downstream task.
 # For the demonstration purpose, we omit these steps here
@@ -33,6 +35,7 @@ def tokenize(batch):
 
 
 train_dataset, eval_dataset = load_dataset('imdb', split=['train', 'test'])
+print(len(train_dataset), len(eval_dataset))
 train_dataset = train_dataset.map(tokenize, batched=True, batch_size=32)
 eval_dataset = eval_dataset.map(tokenize, batched=True, batch_size=32)
 
@@ -83,12 +86,9 @@ def predict(model, eval_dataset, step, device):
         attention_mask = batch['attention_mask'].to(device)
         labels = batch['labels']
         with torch.no_grad():
-            logits, _ = model(input_ids=input_ids, attention_mask=attention_mask)
-            if torch.cuda.is_available():
-                model_output = logits.detach().cuda()
-            else:
-                model_output = logits.detach().cpu()
-            logits = model_output.logits
+            model_output = model(input_ids=input_ids, attention_mask=attention_mask)
+            logits = model_output.logits.detach().cpu()
+
         for i in range(len(logits)):
             pred_logits.append(logits[i].numpy())
             label_ids.append(labels[i])
