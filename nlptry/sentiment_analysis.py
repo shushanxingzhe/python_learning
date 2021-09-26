@@ -1,7 +1,8 @@
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
+from nltk.sentiment import SentimentIntensityAnalyzer
 # import nltk
-# nltk.download('movie_reviews')
+# nltk.download('vader_lexicon')
 
 paragraph = '''
 Watching godzilla was probably one of the most insulting two hours of my life. The movie was terrible. Bad acting performance to all the characters. Personally, i hate this movie more than anything you could possibly imagine. Poor storyline and pure garbage from start to finish !! this movie is the worst piece of trash to come out of this year. To all of you, save your money !!
@@ -20,6 +21,5 @@ print(review.sentiment)
 blob = TextBlob(review.string, analyzer=NaiveBayesAnalyzer())
 print(blob.sentiment)
 
-
-import gensim.models.tfidfmodel
-import jieba.analyse.textrank
+vader = SentimentIntensityAnalyzer()
+print(vader.polarity_scores(paragraph))

@@ -2,7 +2,7 @@ from datasets import load_dataset
 import textbrewer
 from textbrewer import GeneralDistiller
 from textbrewer import TrainingConfig, DistillationConfig
-from transformers import BertModel, BertConfig, AdamW, BertTokenizerFast
+from transformers import DistilBertForSequenceClassification, DistilBertConfig, AdamW, DistilBertTokenizerFast
 from transformers import get_linear_schedule_with_warmup
 import torch
 from torch.utils.data import Dataset, DataLoader
@@ -15,19 +15,19 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 device = torch.device('cuda' if torch.cuda.is_available()  else 'cpu')
 
 # Define models
-teacher_model = BertModel.from_pretrained('bert-base-uncased', output_hidden_states=True)
+teacher_model = DistilBertForSequenceClassification.from_pretrained('distilbert-base-uncased-finetuned-sst-2-english', output_hidden_states=True)
 teacher_model.output_hidden_states = True
 # Teacher should be initialized with pre-trained weights and fine-tuned on the downstream task.
 # For the demonstration purpose, we omit these steps here
 
-bert_config_l3 = BertConfig.from_json_file('bert_l3.json')
+bert_config_l3 = DistilBertConfig.from_json_file('distilbert_l3.json')
 bert_config_l3.output_hidden_states = True
-student_model = BertModel(bert_config_l3)  # , num_labels = 2
+student_model = DistilBertForSequenceClassification(bert_config_l3)  # , num_labels = 2
 student_model.init_weights()
 teacher_model.to(device=device)
 student_model.to(device=device)
 
-tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased-finetuned-sst-2-english')
 
 
 def tokenize(batch):
@@ -36,6 +36,10 @@ def tokenize(batch):
 
 train_dataset, eval_dataset = load_dataset('imdb', split=['train', 'test'])
 print(len(train_dataset), len(eval_dataset))
+# train_dataset = train_dataset.shuffle().select(range(3000))
+eval_dataset = train_dataset.shuffle().select(range(2000))
+
+
 train_dataset = train_dataset.map(tokenize, batched=True, batch_size=32)
 eval_dataset = eval_dataset.map(tokenize, batched=True, batch_size=32)
 
@@ -114,11 +118,11 @@ distill_config = DistillationConfig(
     probability_shift=False,
     intermediate_matches=[
         {'layer_T': 0, 'layer_S': 0, 'feature': 'hidden', 'loss': 'hidden_mse', 'weight': 1},
-        {'layer_T': 6, 'layer_S': 1, 'feature': 'hidden', 'loss': 'hidden_mse', 'weight': 1},
-        {'layer_T': 11, 'layer_S': 2, 'feature': 'hidden', 'loss': 'hidden_mse', 'weight': 1},
+        {'layer_T': 3, 'layer_S': 1, 'feature': 'hidden', 'loss': 'hidden_mse', 'weight': 1},
+        {'layer_T': 5, 'layer_S': 2, 'feature': 'hidden', 'loss': 'hidden_mse', 'weight': 1},
         {'layer_T': [0, 0], 'layer_S': [0, 0], 'feature': 'hidden', 'loss': 'nst', 'weight': 1},
-        {'layer_T': [6, 6], 'layer_S': [1, 1], 'feature': 'hidden', 'loss': 'nst', 'weight': 1},
-        {'layer_T': [11, 11], 'layer_S': [2, 2], 'feature': 'hidden', 'loss': 'nst', 'weight': 1}]
+        {'layer_T': [3, 3], 'layer_S': [1, 1], 'feature': 'hidden', 'loss': 'nst', 'weight': 1},
+        {'layer_T': [5, 5], 'layer_S': [2, 2], 'feature': 'hidden', 'loss': 'nst', 'weight': 1}]
 )
 
 print("train_config:")
