@@ -41,7 +41,7 @@ import pandas as pd
 # df.to_csv('F:\Download\gearbest_category_with_layers.csv',index=False)
 
 
-df = pd.read_csv('F:\Download\gearbest_category_with_layers.csv')
+df = pd.read_csv('F:\Download\gb_category_with_layers.csv')
 # df = df[((df['cat_level'] == 1) | (df['cat_level'] == 2))]
 df = df.sort_values(by='parent_id',ascending=True)
 cat_map = {}

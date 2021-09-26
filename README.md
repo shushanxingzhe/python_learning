@@ -116,7 +116,38 @@
 * [trie](nlptry/trie.py) 
 * [word cloud](nlptry/wordsCloud.py) 
 
+####Numpy Matplotlib Ppandas
+* [beta_distribution](numpy_matplotlib_pandas/beta_distribution.py) 
+* [distribution_solidification](numpy_matplotlib_pandas/distribution_solidification.py) 
+* [heart shape](numpy_matplotlib_pandas/heartShape.py) 
+* [matplot 2D](numpy_matplotlib_pandas/matplot.py) 
+* [matplot 3D](numpy_matplotlib_pandas/matplot3d.py) 
+* [matplot 3D](numpy_matplotlib_pandas/matplot3d.py) 
+* [pandas try](numpy_matplotlib_pandas/pandasTry.py)  
+* [plot_tree](numpy_matplotlib_pandas/plot_tree.py)  
+* [plotly](numpy_matplotlib_pandas/plotlyTry.py)  
+* [poly fit](numpy_matplotlib_pandas/scipyTry.py)  
 
 
+####miscellaneous
+* Tushare 
+    * [pool](other/analyses.py) 
+    * [turning point](other/testtushare.py) 
+    * [plot_candle](other/stock.py) 
+* [tesseract](other/tesseract.py) 
+* [try_mxnet](other/try_mxnet.py) 
+* [try_zipline](other/try_zipline.py) 
+* [word_cloud_portrait](other/word_cloud_portrait.py) 
+* [decisionTree](decisionTree.py) 
+* [image_edge](image_edge.py) 
+* [neo4j](neo4jGraph.py) 
+* [redis](pyredis.py) 
+
+####sklearn
+* [gaussianMixture](scikitlearn/gaussianMixture.py) 
+* [gridSearchCrossValidation](scikitlearn/gridSearchCrossValidation.py) 
+* [kmeans](scikitlearn/kmeansTry.py) 
+* [ngram](scikitlearn/ngram.py) 
+* [ROC](scikitlearn/roc.py) 
 
 
