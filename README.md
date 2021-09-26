@@ -1,5 +1,5 @@
 
-####Keras
+#### Keras
 * [simple boston model](deep_learning/keras/boston.py) 
 * [deep_dream](deep_learning/keras/deep_dream.py) 
 * [deep_dream](deep_learning/keras/deep_dream.py) 
@@ -17,23 +17,23 @@
 * [visualize_filter](deep_learning/keras/visualize_filter.py) 
 * [visualize_intermediate](deep_learning/keras/visualize_intermediate.py) 
 
-####Pytorch
+#### Pytorch
 * [fashion_mnist](deep_learning/pytorch/fashion_mnist_torch.py) 
 * [cifar10](deep_learning/pytorch/cifar10_torch.py) 
 
-####Pytorch
+#### Tensorflow
 * [request_tfserving](deep_learning/request_tfserving.py) 
 * [multi_input](deep_learning/multi_input_keras.py) 
 * [sequence](deep_learning/sequence.py) 
 
-####Algorithm
+#### Algorithm
 * [dijkstra](algorithm/dijkstra.py) 
 * [hmm](algorithm/hmm.py) 
 * [kmeans](algorithm/kmeans.py) 
 * [prim_minimum_spanning_tree](algorithm/prim_minimum_spanning_tree.py) 
 * [viterbi](algorithm/viterbi.py) 
 
-####Gist
+#### Gist
 * [binary_search](gist/binary_search.py) 
 * [binary_tree](gist/binary_tree.py) 
 * [clockwise_array](gist/clockwise_array.py) 
@@ -53,7 +53,7 @@
 * [tf_linerregression](gist/tf_linerregression.py) 
 * [transition_prob_matrix](gist/transition_prob_matrix.py) 
 
-####Parallel
+#### Parallel
 * [aiohttp](accelerate/aiohttp_client.py) 
 * [asyncio](accelerate/asyncio_multitask.py) 
 * gevent 
@@ -64,23 +64,23 @@
  * [multi_processing](accelerate/multi_processing.py) 
  * [multi_threading](accelerate/multi_threading.py) 
  
- ####Automation
+ #### Automation
 * [pywinauto](automation/pywinauto_try.py) 
 * [uiautomation](automation/uiautomation_try.py) 
  
- ####ML
+ #### ML
 * [NNI](ml/nni_trials/train.py) 
 * [Tpot](ml/tpot_auto_regression.py) 
 * [xgboost_classifier](ml/xgboost_classifier.py) 
 * [xgboost_regression](ml/xgboost_regression.py)  
 
 
-####NLP
-#####Knowledge Distillation
+#### NLP
+##### Knowledge Distillation
 * [Distill distilbert](nlp/distill/distill_distilbert.py) 
 * [Distill bert](nlp/distill/distill_bert.py) 
 
-#####transformers
+##### transformers
 * [dialoggpt](nlp/dialoggpt.py) 
 * [electra_discriminator](nlp/electra_discriminator.py) 
 * [finetune_bert](nlp/finetune_bert.py) 
@@ -88,7 +88,7 @@
 * [roberta_pipeline](nlp/roberta_pipeline.py) 
 * [transformers_finetuning](nlp/transformer_finetuning.py) 
 
-#####others
+##### others
 * [snips](nlp/snips.py) 
 * [bigram_prob](nlptry/bigram_prob.py) 
 * [bpe](nlptry/bpe.py) 
@@ -116,20 +116,20 @@
 * [trie](nlptry/trie.py) 
 * [word cloud](nlptry/wordsCloud.py) 
 
-####Numpy Matplotlib Ppandas
+#### Numpy Matplotlib Ppandas
 * [beta_distribution](numpy_matplotlib_pandas/beta_distribution.py) 
 * [distribution_solidification](numpy_matplotlib_pandas/distribution_solidification.py) 
 * [heart shape](numpy_matplotlib_pandas/heartShape.py) 
 * [matplot 2D](numpy_matplotlib_pandas/matplot.py) 
 * [matplot 3D](numpy_matplotlib_pandas/matplot3d.py) 
-* [matplot 3D](numpy_matplotlib_pandas/matplot3d.py) 
 * [pandas try](numpy_matplotlib_pandas/pandasTry.py)  
 * [plot_tree](numpy_matplotlib_pandas/plot_tree.py)  
 * [plotly](numpy_matplotlib_pandas/plotlyTry.py)  
 * [poly fit](numpy_matplotlib_pandas/scipyTry.py)  
+* [excel_xlwings](numpy_matplotlib_pandas/excel_xlwings.py)  
 
 
-####miscellaneous
+#### Miscellaneous
 * Tushare 
     * [pool](other/analyses.py) 
     * [turning point](other/testtushare.py) 
@@ -138,12 +138,13 @@
 * [try_mxnet](other/try_mxnet.py) 
 * [try_zipline](other/try_zipline.py) 
 * [word_cloud_portrait](other/word_cloud_portrait.py) 
+* [camelot pdf](other/pdf_table.py) 
 * [decisionTree](decisionTree.py) 
 * [image_edge](image_edge.py) 
 * [neo4j](neo4jGraph.py) 
 * [redis](pyredis.py) 
 
-####sklearn
+#### sklearn
 * [gaussianMixture](scikitlearn/gaussianMixture.py) 
 * [gridSearchCrossValidation](scikitlearn/gridSearchCrossValidation.py) 
 * [kmeans](scikitlearn/kmeansTry.py) 
