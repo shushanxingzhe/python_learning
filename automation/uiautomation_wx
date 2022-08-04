@@ -1,0 +1,16 @@
+import subprocess
+import time
+import uiautomation
+
+# 使用inspect.exe捕获窗口或控件元素信息
+subprocess.Popen("C:\Program Files (x86)\Tencent\WeChat\WeChat.exe")
+time.sleep(1)
+window2 = uiautomation.WindowControl(searchDepth=1, Name='微信', ClassName='WeChatMainWndForPC')
+elem_search = window2.Control(Name='搜索')
+elem_search.Click(simulateMove=False)
+elem_search.SendKeys('周星驰', waitTime=1)
+elem_search.SendKeys('{ENTER}')
+elem_msg = window2.EditControl(Name='输入')
+elem_msg.Click(simulateMove=False)
+elem_msg.SendKeys('你的电影很搞笑', waitTime=1)
+elem_msg.SendKeys('{ENTER}')
